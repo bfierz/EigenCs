@@ -19,15 +19,15 @@ class Program
         Matrix3f M3 = new Matrix3f();
         M3.Set(0, 0, 1);
         M3[2, 2] = 1;
-        Example.print(M3);
+        Example.Print(M3);
 
         var D2 = new float[2, 2] { { 0.0f, 1.0f }, { 2.0f, 3.0f } };
         var M2 = new Matrix2f(D2);
-        Example.print(M2);
+        Example.Print(M2);
 
         var D23 = new float[2, 3] { { 0.0f, 1.0f, 2.0f }, { 3.0f, 4.0f, 5.0f } };
         var M23 = new MatrixXf(D23);
-        Example.print(M23);
+        Example.Print(M23);
 
         var S = new float[2, 3];
         M23.CopyTo(S);

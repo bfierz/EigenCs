@@ -149,3 +149,6 @@ eigen_typemap(Matrix4f, float, 4, 4)
 
 eigen_typemap(VectorXf, float, -1,  1)
 eigen_typemap(MatrixXf, float, -1, -1)
+
+// Reset function naming
+%rename("%s", %$isfunction) "";
