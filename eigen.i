@@ -6,6 +6,8 @@
   #include <vector>
 %}
 
+%include "attribute.i"
+
 // Declare the namespace to place the generated output
 // Note: This is currently not working as expected. The namespace passed as
 //       argument to the generator.
@@ -78,6 +80,12 @@ namespace Eigen
 // Create extensions to the Matrix type for C#
 %define eigen_typemap(SwigType, Scalar, NrRows, NrCols)
 
+// Generate attributes for 'cols' and 'rows' intead of methods
+%ignore Eigen::Matrix<Scalar, NrRows, NrCols>::cols() const;
+%ignore Eigen::Matrix<Scalar, NrRows, NrCols>::rows() const;
+%attribute(%arg(Eigen::Matrix<Scalar, NrRows, NrCols>), long long, Cols, cols);
+%attribute(%arg(Eigen::Matrix<Scalar, NrRows, NrCols>), long long, Rows, rows);
+
 // C++ specific extensions as ()-operator is not available in C#
 %extend Eigen::Matrix<Scalar, NrRows, NrCols> {
 
@@ -113,8 +121,8 @@ namespace Eigen
     gch.Free();
   }
   public void CopyTo(ref Scalar[,] values) {
-    if (values.GetLength(0) != Rows() || values.GetLength(1) != Cols()) {
-      values = new Scalar[Rows(), Cols()];
+    if (values.GetLength(0) != Rows || values.GetLength(1) != Cols) {
+      values = new Scalar[Rows, Cols];
     }
 	CopyTo(values);
   }
