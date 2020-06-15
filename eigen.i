@@ -31,6 +31,9 @@ namespace Eigen
 
     long long cols() const;
     long long rows() const;
+
+    Matrix operator+(const Matrix&) const;
+    Matrix operator-(const Matrix&) const;
   };
 
   template<typename Scalar>
@@ -42,6 +45,9 @@ namespace Eigen
 
     long long cols() const;
     long long rows() const;
+
+    Matrix operator+(const Matrix&) const;
+    Matrix operator-(const Matrix&) const;
   };
 
   template<typename Scalar>
@@ -53,6 +59,9 @@ namespace Eigen
 
     long long cols() const;
     long long rows() const;
+
+	Matrix operator+(const Matrix&) const;
+	Matrix operator-(const Matrix&) const;
   };
 
   template<typename Scalar>
@@ -64,6 +73,9 @@ namespace Eigen
 
     long long cols() const;
     long long rows() const;
+
+    Matrix operator+(const Matrix&) const;
+    Matrix operator-(const Matrix&) const;
   };
 
   using Vector2f = Matrix<float, 2, 1>;
@@ -85,6 +97,9 @@ namespace Eigen
 %ignore Eigen::Matrix<Scalar, NrRows, NrCols>::rows() const;
 %attribute(%arg(Eigen::Matrix<Scalar, NrRows, NrCols>), long long, Cols, cols);
 %attribute(%arg(Eigen::Matrix<Scalar, NrRows, NrCols>), long long, Rows, rows);
+
+%rename(Add) Eigen::Matrix<Scalar, NrRows, NrCols>::operator+;
+%rename(Sub) Eigen::Matrix<Scalar, NrRows, NrCols>::operator-;
 
 // C++ specific extensions as ()-operator is not available in C#
 %extend Eigen::Matrix<Scalar, NrRows, NrCols> {
