@@ -26,17 +26,22 @@ swig_add_library(EigenNative
 set_property(TARGET EigenNative PROPERTY SWIG_COMPILE_OPTIONS -cpperraswarn)
 get_property(eigen_wrapper_files TARGET EigenNative PROPERTY SWIG_SUPPORT_FILES)
 get_property(eigen_wrapper_files_directory TARGET EigenNative PROPERTY SWIG_SUPPORT_FILES_DIRECTORY)
+list(APPEND eigen_wrapper_files
+	"${eigen_wrapper_files_directory}/Vector2f.cs"
+	"${eigen_wrapper_files_directory}/Vector3f.cs"
+	"${eigen_wrapper_files_directory}/Vector4f.cs"
+	"${eigen_wrapper_files_directory}/VectorXf.cs"
+	"${eigen_wrapper_files_directory}/Matrix2f.cs"
+	"${eigen_wrapper_files_directory}/Matrix3f.cs"
+	"${eigen_wrapper_files_directory}/Matrix4f.cs"
+	"${eigen_wrapper_files_directory}/MatrixXf.cs"
+)
+set_source_files_properties(${eigen_wrapper_files} PROPERTIES GENERATED TRUE)
+message(STATUS ${eigen_wrapper_files})
 add_library(Eigen SHARED
 	${eigen_wrapper_files}
-	${eigen_wrapper_files_directory}/Vector2f.cs
-	${eigen_wrapper_files_directory}/Vector3f.cs
-	${eigen_wrapper_files_directory}/Vector4f.cs
-	${eigen_wrapper_files_directory}/VectorXf.cs
-	${eigen_wrapper_files_directory}/Matrix2f.cs
-	${eigen_wrapper_files_directory}/Matrix3f.cs
-	${eigen_wrapper_files_directory}/Matrix4f.cs
-	${eigen_wrapper_files_directory}/MatrixXf.cs
 )
+target_link_libraries(Eigen EigenNative)
 
 # Native library and bindings
 add_library(ExampleNative STATIC
